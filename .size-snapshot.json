@@ -1,0 +1,7 @@
+{
+  "dist/index.js": {
+    "bundled": 91977,
+    "minified": 28916,
+    "gzipped": 10799
+  }
+}
