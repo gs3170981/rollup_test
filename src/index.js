@@ -1,6 +1,6 @@
 // core-js 2.0写法
 // import "@babel/polyfill";
-// core-js 3.0写法 如果 babel配置项 是 entry 则需要以下引用
+// core-js 3.0写法 如果 babel配置项 是 entry 则需要以下安装且引用
 // import "core-js/stable";
 // import "regenerator-runtime/runtime";
 

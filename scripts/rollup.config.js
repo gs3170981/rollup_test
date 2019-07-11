@@ -5,10 +5,8 @@ import json from 'rollup-plugin-json';
 import resolve from 'rollup-plugin-node-resolve';
 // 打包时先将模块编译为es5再执行 用于打包
 import commonjs from 'rollup-plugin-commonjs';
-// 编译es6+
+// 编译es6+ 他会默认执行根目录的babel.conf配置
 import babel from 'rollup-plugin-babel';
-// babel配置项
-import babelConfig from './babel.config.js';
 
 // import buble from 'rollup-plugin-buble';
 // buble不支持async与generator 打补丁(仍不支持generator)
@@ -27,7 +25,7 @@ const publicConf = [
       file: resolveFile('dist/index.js'),
       // iife -适用于浏览器 es -es5模块 cjs -node模块 amd -类似RequireJS的加载器 umd -通用 但注意体积
       format: 'umd',
-      name: 'demo'
+      name: 'demo' // 必填
     },
     plugins: [
       resolve(),

@@ -18,7 +18,7 @@ export default publicConf.map((config, index) => {
     ...[
       // sizeSnapshot文档提示需放在ug之上，否则终端看不到
       sizeSnapshot(),
-      uglify(),
+      // uglify(),
     ]
   ]
   config.external = [
