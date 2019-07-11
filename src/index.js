@@ -3,7 +3,8 @@
 // core-js 3.0写法 如果 babel配置项 是 entry 则需要以下安装且引用
 // import "core-js/stable";
 // import "regenerator-runtime/runtime";
-
+import './stylus/index.less';
+import './stylus/base.css';
 import val from './foo.js';
 // import $ from 'jquery';
 

@@ -1,0 +1,17 @@
+@import './var/index.less';
+
+html,
+body {
+  background-color: var(--main-color);
+  color: @text-color;
+}
+
+html {
+  a {
+    cursor: default;
+    opacity: .9;
+    transition: 1s;
+    transform: scale(0.5);
+    background: linear-gradient(to right, red, blue);
+  }
+}

@@ -1,0 +1,18 @@
+ul,
+li {
+  list-style: none;
+}
+
+html {
+  a {
+    transition: 1s;
+    cursor: default;
+    opacity: .9;
+    transform: scale(0.5);
+    background: linear-gradient(to right, red, blue);
+  }
+}
+
+::placeholder {
+  color: blue;
+}

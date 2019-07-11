@@ -1,0 +1,14 @@
+:root {
+  --main-color: black;
+}
+html,
+body {
+  background-color: var(--main-color);
+  color: #428bca;
+}
+html a {
+  cursor: default;
+  opacity: 0.9;
+  transform: scale(0.5);
+  background: linear-gradient(to right, red, blue);
+}

@@ -7,6 +7,7 @@ import {
 const PORT = 3000;
 
 module.exports = publicConf.map((config, index) => {
+  // 映射具体的文件，debugger非常方便
   config.output.sourcemap = true;
   if (index === 0) {
     config.plugins = [

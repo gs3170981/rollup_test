@@ -7,11 +7,18 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 // 编译es6+ 他会默认执行根目录的babel.conf配置
 import babel from 'rollup-plugin-babel';
+// 作用就是 添加一个style标签加到html head的头部
+import postcss from 'rollup-plugin-postcss';
 
-// import buble from 'rollup-plugin-buble';
-// buble不支持async与generator 打补丁(仍不支持generator)
-// import async from 'rollup-plugin-async';
-// import "@babel/polyfill";
+// PostCSS plugins
+// 声明变量
+import simplevars from 'postcss-simple-vars';
+// 可嵌套
+import nested from 'postcss-nested';
+// 可用css最新写法 集成 autoprefixer
+import cssnext from 'postcss-preset-env';
+// css压缩
+import cssnano from 'cssnano';
 
 const resolveFile = function (filePath) {
   return path.join(__dirname, '..', filePath)
@@ -28,11 +35,35 @@ const publicConf = [
       name: 'demo' // 必填
     },
     plugins: [
-      resolve(),
-      // babel(resolveFile('babel.config.js')),
-      // babel(babelConfig),
+      postcss({
+        plugins: [
+          // 如果用less、sass之类的，这些就可以删了，包括package里的, 可以不需要cssnext语法，但要安装autoprefixer
+          simplevars(),
+          nested(),
+          // https://github.com/csstools/postcss-preset-env#browsers
+          cssnext({
+            // 覆盖99.5%以上的css兼容率，此配置项是autoprefixer的，cssnext已集成
+            // https://github.com/browserslist/browserslist#queries
+            browsers: 'cover 99.5%'
+            // 不加这个 则-webkit-的前缀是没有的
+          }),
+          cssnano(),
+        ],
+        // 处理末尾的后缀文件
+        extensions: ['.css', '.less', '.styl', '.sass', '.scss'],
+        // https://github.com/egoist/rollup-plugin-postcss
+      }),
+      // 没有这个 只用babel的话，无法import node_modules库，打包出来仍有require
+      resolve({
+        customResolveOptions: {
+          moduleDirectory: 'node_modules' // 仅处理node_modules内的库
+        }
+      }),
+      // https://www.npmjs.com/package/rollup-plugin-node-resolve
       babel({
+        // 如果用了transform-runtime插件则需开启这个
         runtimeHelpers: true,
+        // 不编译node_modules里的库，否则里面的写法与@babel/runtime-corejs3的版本会有冲突
         exclude: 'node_modules/**',
         // presets: ["@babel/preset-env"]
       }),
