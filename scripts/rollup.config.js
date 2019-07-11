@@ -25,8 +25,14 @@ const publicConf = [{
     json(),
     resolve(),
     cjs(),
-    buble(),
     async (),
+      buble({
+        // generator不支持编译，需加这个配置项
+        // async将会编译成generator，但generator不会编译，没找到好的插件
+        transforms: {
+          generator: false
+        }
+      }),
   ],
 }]
 
