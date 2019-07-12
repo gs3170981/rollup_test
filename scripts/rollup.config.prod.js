@@ -11,6 +11,7 @@ import {
 }
 from 'rollup-plugin-uglify'
 
+
 export default publicConf.map((config, index) => {
   config.output.sourcemap = false;
   config.plugins = [

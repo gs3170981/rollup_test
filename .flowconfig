@@ -1,0 +1,14 @@
+[include]
+../src
+
+[ignore]
+.*/dist/.*
+.*/lib/.*
+.*/node_modules/.*
+.*/scripts/.*
+.*/example/.*
+
+[libs]
+flow
+
+[options]

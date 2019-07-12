@@ -7,6 +7,12 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 // 编译es6+ 他会默认执行根目录的babel.conf配置
 import babel from 'rollup-plugin-babel';
+// 别名
+import alias from 'rollup-plugin-alias';
+// 打包时去除flow写法 - 但rollup dev环境其实也是打包
+import flow from 'rollup-plugin-flow-no-whitespace'
+// 动态替换代码中的内容，例如定义__D__: true 则在打包生成后__D__值为true
+import replace from 'rollup-plugin-replace'
 // 作用就是 添加一个style标签加到html head的头部
 import postcss from 'rollup-plugin-postcss';
 
@@ -27,6 +33,8 @@ const publicConf = [
   // 可配置多入口出口
   // {}
   {
+    banner: '', // 顶部加注释
+    footer: '', // 尾部加注释
     input: resolveFile('src/index.js'),
     output: {
       file: resolveFile('dist/index.js'),
@@ -59,6 +67,15 @@ const publicConf = [
           moduleDirectory: 'node_modules' // 仅处理node_modules内的库
         }
       }),
+      replace({
+        // do something...
+        __Author__: 'gs3170981'
+      }),
+      alias({
+        '@': resolveFile('src')
+      }),
+      flow(),
+      // 前后顺序很重要 - 先babel再flow就卡着了
       // https://www.npmjs.com/package/rollup-plugin-node-resolve
       babel({
         // 如果用了transform-runtime插件则需开启这个
