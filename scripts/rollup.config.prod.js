@@ -6,13 +6,13 @@ import {
 import {
   sizeSnapshot
 } from 'rollup-plugin-size-snapshot'
-import {
-  uglify
-}
-from 'rollup-plugin-uglify'
+// import {
+//   uglify
+// }
+// from 'rollup-plugin-uglify'
 
 
-export default publicConf.map((config, index) => {
+module.exports = publicConf.map((config, index) => {
   config.output.sourcemap = false;
   config.plugins = [
     ...config.plugins,
